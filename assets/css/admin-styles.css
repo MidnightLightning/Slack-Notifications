@@ -1,31 +1,126 @@
-#slack_bot_image_preview {
-  max-width  : 200px;
-  max-height : 200px;
+.dorzki_image_preview {
+	max-width: 200px;
+	max-height: 200px;
 }
 
-#slack_bot_image_preview img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 10px 0;
-  border: 1px solid #c0c0c0;
-  padding: 5px;
-  background-color: #f8f8f8;
+.dorzki_image_preview img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	margin: 10px 0;
+	border: 1px solid #c0c0c0;
+	padding: 5px;
+	background-color: #f8f8f8;
 }
 
 #test-spinner {
-  display: none;
-  width: 16px;
-  height: auto;
-  vertical-align: -7px;
+	display: none;
+	width: 16px;
+	height: auto;
+	vertical-align: -7px;
 }
 
 .test-success,
 .test-fail {
-  font-size: 22pt;
-  color: green;
+	font-size: 22pt;
+	color: green;
 }
 
 .test-fail {
-  color: red;
+	color: red;
+}
+
+.dorzki-tab {
+	display: none;
+	padding: 15px;
+}
+
+.dorzki-tab.active {
+	display: block;
+}
+
+.dorzki-tab h3:first-child {
+	margin-top: 0;
+}
+
+.dorzki-collapse {
+	margin: 0 auto 10px;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.dorzki-collapse .dorzki-collapse-header {
+	background: #fafafa;
+	color: #23282d;
+	border: 1px solid #e5e5e5;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+}
+
+.dorzki-collapse .dorzki-collapse-header h3 {
+	margin: 0;
+	padding: 15px;
+	font-size: 1em;
+	line-height: 1;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-weight: normal;
+	cursor: pointer;
+}
+
+.dorzki-collapse .dorzki-collapse-header .dorzki-collapse-action {
+	float: right;
+	position: relative;
+}
+
+.dorzki-collapse-header .dorzki-collapse-action a {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	outline: 0;
+	text-decoration: none;
+	color: #555d66;
+}
+
+.dorzki-collapse-header .dorzki-collapse-action a::after {
+	padding: 1px 2px 1px 0;
+	margin-top: 10px;
+	margin-right: 10px;
+	right: 0;
+	content: "\f140";
+	border: none;
+	background: 0 0;
+	font: 400 20px/1 dashicons;
+	speak: none;
+	display: block;
+	text-indent: 0;
+	text-align: center;
+	position: relative;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-decoration: none !important;
+}
+
+.dorzki-collapse.open .dorzki-collapse-header .dorzki-collapse-action a::after {
+	content: "\f142";
+}
+
+.dorzki-collapse .dorzki-collapse-body {
+	padding: 1px 15px 15px;
+	line-height: 16px;
+	background-color: #ffffff;
+	border: 1px solid #e5e5e5;
+	border-top: none;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+	overflow: hidden;
+	display: none;
+}
+
+.dorzki-collapse .dorzki-collapse-body p {
+	margin-bottom: 0;
 }
