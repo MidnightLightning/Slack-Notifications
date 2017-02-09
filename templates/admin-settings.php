@@ -22,6 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<form action="options.php" method="post">
 		<?php settings_fields( 'dorzki-slack' ); ?>
 
+		<!-- Navigation Tabs -->
+		<?php include_once( DS_PLUGIN_ROOT_DIR . DS_TEMPLATES_DIR . 'tabs-navigation.php' ); ?>
+		<!-- /Navigation Tabs -->
+
 		<?php submit_button(); ?>
 	</form>
 </div>

@@ -41,6 +41,15 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 
 
 		/**
+		 * SlackAdmin instance handler.
+		 *
+		 * @since 1.1.0
+		 * @var object
+		 */
+		public $admin;
+
+
+		/**
 		 * SlackPlugin constructor.
 		 *
 		 * @since   1.1.0
@@ -48,8 +57,12 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 		 */
 		function __construct() {
 
+			$this->admin = new SlackAdmin();
+
 			add_action( 'plugins_loaded', [ $this, 'load_textdomain' ] );
-			add_action( 'admin_menu', [ $this, 'register_admin_page' ] );
+			add_action( 'admin_enqueue_scripts', [ $this, 'register_plugin_assets' ] );
+
+			add_action( 'admin_menu', [ $this->admin, 'register_admin_page' ] );
 
 		}
 
@@ -74,6 +87,20 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 
 
 		/**
+		 * Returns the plugin namespace.
+		 *
+		 * @since   1.1.0
+		 * @version 1.1.0
+		 * @return string
+		 */
+		public static function get_namespace() {
+
+			return self::$namespace;
+
+		}
+
+
+		/**
 		 * Enable plugin i18n & l10n.
 		 *
 		 * @since   1.1.0
@@ -87,39 +114,6 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 
 
 		/**
-		 * Adds new admin page for the plugin under options menu.
-		 *
-		 * @since   1.1.0
-		 * @version 1.1.0
-		 */
-		public function register_admin_page() {
-
-			add_options_page( __( 'Slack Notifications', 'dorzki-notifications-to-slack' ), __( 'Slack Notifications', 'dorzki-notifications-to-slack' ), 'manage_options', $this::$namespace, [
-				$this,
-				'admin_page_template'
-			] );
-
-		}
-
-
-		/**
-		 * Displays the plugin's settings page.
-		 *
-		 * @since   1.1.0
-		 * @version 1.1.0
-		 */
-		public function admin_page_template() {
-
-			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die( esc_html__( 'Oops... It\'s seems like you don\'t meet the required level of permissions', 'dorzki-notifications-to-slack' ) );
-			}
-
-			include_once( DS_PLUGIN_ROOT_DIR . DS_TEMPLATES_DIR . 'admin-settings.php' );
-
-		}
-
-
-		/**
 		 * Register the plugin's css & js files.
 		 *
 		 * @since   1.1.0
@@ -127,8 +121,8 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 		 */
 		public function register_plugin_assets() {
 
-			wp_register_script( 'dorzki-slack-scripts', PLUGIN_ROOT_URL . 'assets/js/admin-scripts.js' );
-			wp_register_style( 'dorzki-slack-settings-css', PLUGIN_ROOT_URL . 'assets/css/admin-styles.css' );
+			wp_register_script( "{$this::$namespace}_scripts", DS_PLUGIN_URL . DS_ASSETS_DIR . 'js/admin-scripts.js' );
+			wp_register_style( "{$this::$namespace}_settings-css", DS_PLUGIN_URL . DS_ASSETS_DIR . 'css/admin-styles.css' );
 
 			if ( "settings_page_{$this::$namespace}" === get_current_screen()->id ) {
 
@@ -137,11 +131,11 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 				wp_enqueue_script( 'media_upload' );
 
 				wp_enqueue_style( 'thickbox' );
-				wp_enqueue_style( 'dorzki-slack-settings-css' );
+				wp_enqueue_style( "{$this::$namespace}_settings-css" );
 
 			}
 
-			wp_enqueue_script( 'dorzki-slack-scripts' );
+			wp_enqueue_script( "{$this::$namespace}_scripts" );
 
 		}
 
