@@ -26,6 +26,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php include_once( DS_PLUGIN_ROOT_DIR . DS_TEMPLATES_DIR . 'tabs-navigation.php' ); ?>
 		<!-- /Navigation Tabs -->
 
+		<!-- Tabs Contents -->
+		<?php include_once( DS_PLUGIN_ROOT_DIR . DS_TEMPLATES_DIR . 'tabs-contents.php' ); ?>
+		<!-- /Tabs Contents -->
+
 		<?php submit_button(); ?>
 	</form>
 </div>
