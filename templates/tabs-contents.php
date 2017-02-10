@@ -12,18 +12,20 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @author    Dor Zuberi <me@dorzki.co.il>
  * @link      https://www.dorzki.co.il
  */
+
+$i = 0;
 ?>
 <div class="tabs-wrapper dorzki-tabs-wrapper">
-	<?php foreach ( $this->tabs as $idx => $tab ) : ?>
+	<?php foreach ( self::$tabs as $id => $tab ) : $i ++ ?>
 
-		<!-- <?php echo ucfirst( $tab[ 'label' ] ); ?> Tab -->
-		<div id="<?php echo esc_attr( $tab[ 'id' ] ); ?>" class="dorzki-tab <?php echo ( $idx === 0 ) ? 'active' : ''; ?>">
-			<h3><?php echo esc_html( $tab[ 'label' ] ); ?></h3>
+		<!-- <?php echo ucfirst( $tab[ 'name' ] ); ?> Tab -->
+		<div id="<?php echo esc_attr( $id ); ?>" class="dorzki-tab <?php echo ( $i === 1 ) ? 'active' : ''; ?>">
+			<h3><?php echo esc_html( $tab[ 'name' ] ); ?></h3>
 
-			<?php include( DS_PLUGIN_ROOT_DIR . DS_TEMPLATES_DIR . 'tabs-body.php' ); ?>
+			<?php include( DS_PLUGIN_ROOT_DIR . DS_TEMPLATES_DIR . 'tab-body.php' ); ?>
 
 		</div>
-		<!-- /<?php echo ucfirst( $tab[ 'label' ] ); ?> Tab -->
+		<!-- /<?php echo ucfirst( $tab[ 'name' ] ); ?> Tab -->
 
 	<?php endforeach; ?>
 </div>

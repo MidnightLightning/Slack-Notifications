@@ -47,6 +47,7 @@ if ( ! defined( 'DS_ASSETS_DIR' ) ) {
 /**
  * Plugin Classes
  */
+include_once( DS_PLUGIN_ROOT_DIR . DS_CLASSES_DIR . 'slack-settings.php' );
 include_once( DS_PLUGIN_ROOT_DIR . DS_CLASSES_DIR . 'slack-admin.php' );
 include_once( DS_PLUGIN_ROOT_DIR . DS_CLASSES_DIR . 'slack-plugin.php' );
 

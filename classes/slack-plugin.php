@@ -30,7 +30,6 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 		 */
 		protected static $instance = null;
 
-
 		/**
 		 * Plugin's unique namespace.
 		 *
@@ -41,15 +40,6 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 
 
 		/**
-		 * SlackAdmin instance handler.
-		 *
-		 * @since 1.1.0
-		 * @var object
-		 */
-		public $admin;
-
-
-		/**
 		 * SlackPlugin constructor.
 		 *
 		 * @since   1.1.0
@@ -57,12 +47,11 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 		 */
 		function __construct() {
 
-			$this->admin = new SlackAdmin();
+			new SlackAdmin();
+			new SlackSettings();
 
 			add_action( 'plugins_loaded', [ $this, 'load_textdomain' ] );
 			add_action( 'admin_enqueue_scripts', [ $this, 'register_plugin_assets' ] );
-
-			add_action( 'admin_menu', [ $this->admin, 'register_admin_page' ] );
 
 		}
 
@@ -73,6 +62,7 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 		 *
 		 * @since   1.1.0
 		 * @version 1.1.0
+		 *
 		 * @return object
 		 */
 		public static function get_instance() {
@@ -91,6 +81,7 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 		 *
 		 * @since   1.1.0
 		 * @version 1.1.0
+		 *
 		 * @return string
 		 */
 		public static function get_namespace() {
