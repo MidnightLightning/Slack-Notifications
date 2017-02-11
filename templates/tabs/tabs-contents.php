@@ -20,7 +20,11 @@ $i = 0;
 
 		<!-- <?php echo ucfirst( $tab[ 'name' ] ); ?> Tab -->
 		<div id="<?php echo esc_attr( $id ); ?>" class="dorzki-tab <?php echo ( $i === 1 ) ? 'active' : ''; ?>">
-			<h3><?php echo esc_html( $tab[ 'name' ] ); ?></h3>
+			<h3 class="wp-heading-inline"><?php echo esc_html( $tab[ 'name' ] ); ?></h3>
+
+			<?php if ( SlackAdmin::TAB_NOTIFICATIONS === $id ) : ?>
+				<a href="#create-notification" class="dorzki-create-notification page-title-action"><?php esc_html_e( 'Add New Notification', 'dorzki-notifications-to-slack' ); ?></a>
+			<?php endif; ?>
 
 			<?php include( DS_TEMPLATES_DIR . 'tabs/tab-body.php' ); ?>
 

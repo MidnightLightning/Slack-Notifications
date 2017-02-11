@@ -1,3 +1,4 @@
+<?php $j = 0; ?>
 <table class="form-table">
 	<tbody>
 

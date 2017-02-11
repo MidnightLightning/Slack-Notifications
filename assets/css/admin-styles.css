@@ -39,8 +39,21 @@
 	display: block;
 }
 
-.dorzki-tab h3:first-child {
+.dorzki-tab h3 {
 	margin-top: 0;
+}
+
+.dorzki-tab h3.wp-heading-inline {
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.dorzki-tab .wp-heading-inline + .page-title-action {
+	top: 0;
+}
+
+.dorzki-tab .notification-row {
+	padding: 0;
 }
 
 .dorzki-collapse {
@@ -122,5 +135,6 @@
 }
 
 .dorzki-collapse .dorzki-collapse-body p {
+	margin-top: 14px;
 	margin-bottom: 0;
 }

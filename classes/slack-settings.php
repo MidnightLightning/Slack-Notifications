@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 } // Exit if accessed directly
 
 /**
- * Admin plugin class.
+ * Settings plugin class.
  *
  * @package   Slack Notifications
  * @since     1.1.0
@@ -75,6 +75,12 @@ if ( ! class_exists( 'SlackSettings' ) ) {
 		}
 
 
+		/**
+		 * Register default plugin fields.
+		 *
+		 * @since   1.1.0
+		 * @version 1.1.0
+		 */
 		public function register_plugin_fields() {
 
 			$default_fields = [
@@ -145,13 +151,25 @@ if ( ! class_exists( 'SlackSettings' ) ) {
 				$field_type = self::FIELD_TYPE_TEXT;
 			}
 
+			if ( self::FIELD_TYPE_NOTIFICATION === $field_type ) {
+
+				$field_option_id = sprintf( '%s_notifications[%s]', SlackPlugin::PLUGIN_ID, $field_id );
+				$field_value     = isset( $this->notifications_data[ $field_id ] ) ? $this->notifications_data[ $field_id ] : '';
+
+			} else {
+
+				$field_option_id = sprintf( '%s_options[%s]', SlackPlugin::PLUGIN_ID, $field_id );
+				$field_value     = isset( $this->settings_data[ $field_id ] ) ? $this->settings_data[ $field_id ] : '';
+
+			}
+
 			return SlackAdmin::assign_field_to_tab( $tab_id, [
 				'id'          => $field_id,
 				'name'        => $field_name,
 				'type'        => $field_type,
 				'description' => $field_description,
-				'option_id'   => sprintf( '%s_options[%s]', SlackPlugin::PLUGIN_ID, $field_id ),
-				'value'       => isset( $this->settings_data[ $field_id ] ) ? $this->settings_data[ $field_id ] : ''
+				'option_id'   => $field_option_id,
+				'value'       => $field_value
 			] );
 
 		}

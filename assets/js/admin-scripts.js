@@ -77,4 +77,68 @@ jQuery( document ).ready( function( $ ) {
 
 	} );
 
+	// Populate select with dynamic options.
+	function populateOptions( _select, _data ) {
+
+		_select.find( 'option' ).remove();
+
+		for( var key in _data ) {
+
+			var val = ( typeof _data[ key ] === 'object' ) ? _data[ key ].name : _data[ key ];
+
+			$( '<option>' ).val( key ).text( val ).appendTo( _select );
+		}
+
+		_select.trigger( 'change' );
+
+	}
+
+	// Notification category change
+	$( '.notification-cat' ).on( 'change', function() {
+
+		var _select = $( this ).parents( '.dorzki-collapse' ).find( '.notification-type' );
+		var _cat = $( this ).val().trim();
+
+
+		if( _cat.length > 0 ) {
+
+			data = dorzki_slack_notif_types[ _cat ].types;
+
+			if( Object.keys( data ).length > 0 ) {
+
+				_select.show();
+				populateOptions( _select, data );
+
+			} else {
+				_select.hide();
+			}
+
+		}
+
+	} );
+
+	// Notification type change
+	$( '.notification-type' ).on( 'change', function() {
+
+		var _select = $( this ).parents( '.dorzki-collapse' ).find( '.notification-status' );
+		var _cat = $( this ).parents( '.dorzki-collapse' ).find( '.notification-cat' ).val().trim();
+		var _type = $( this ).val().trim();
+
+		if( _type.length > 0 ) {
+
+			data = dorzki_slack_notif_types[ _cat ].types[ _type ].statuses;
+
+			if( typeof data === 'object' && Object.keys( data ).length > 0 ) {
+
+				_select.show();
+				populateOptions( _select, data );
+
+			} else {
+				_select.hide();
+			}
+
+		}
+
+	} );
+
 } );

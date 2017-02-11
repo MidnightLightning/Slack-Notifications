@@ -49,6 +49,7 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 
 			new SlackAdmin();
 			new SlackSettings();
+			new SlackNotifications();
 
 			add_action( 'plugins_loaded', [ $this, 'load_textdomain' ] );
 			add_action( 'admin_enqueue_scripts', [ $this, 'register_plugin_assets' ] );
@@ -99,6 +100,7 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 
 			wp_register_script( $this::PLUGIN_ID . '_scripts', DS_ASSETS_URL . 'js/admin-scripts.js' );
 			wp_register_style( $this::PLUGIN_ID . '_settings-css', DS_ASSETS_URL . 'css/admin-styles.css' );
+			wp_localize_script( $this::PLUGIN_ID . '_scripts', $this::PLUGIN_ID . '_notif_types', SlackNotifications::get_notification_types() );
 
 			if ( 'settings_page_' . $this::PLUGIN_ID === get_current_screen()->id ) {
 
