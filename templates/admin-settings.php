@@ -20,14 +20,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</small>
 	</h2>
 	<form action="options.php" method="post">
-		<?php settings_fields( 'dorzki-slack' ); ?>
+		<?php settings_fields( SlackPlugin::PLUGIN_ID ); ?>
 
 		<!-- Navigation Tabs -->
-		<?php include_once( DS_PLUGIN_ROOT_DIR . DS_TEMPLATES_DIR . 'tabs-navigation.php' ); ?>
+		<?php include_once( DS_TEMPLATES_DIR . 'tabs/tabs-navigation.php' ); ?>
 		<!-- /Navigation Tabs -->
 
 		<!-- Tabs Contents -->
-		<?php include_once( DS_PLUGIN_ROOT_DIR . DS_TEMPLATES_DIR . 'tabs-contents.php' ); ?>
+		<?php include_once( DS_TEMPLATES_DIR . 'tabs/tabs-contents.php' ); ?>
 		<!-- /Tabs Contents -->
 
 		<?php submit_button(); ?>

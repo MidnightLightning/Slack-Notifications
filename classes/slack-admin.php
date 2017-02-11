@@ -30,6 +30,22 @@ if ( ! class_exists( 'SlackAdmin' ) ) {
 		 */
 		protected static $tabs = [];
 
+		/**
+		 * Integration tab id.
+		 *
+		 * @since 1.1.0
+		 * @var string
+		 */
+		const TAB_INTEGRATION = 'integration';
+
+		/**
+		 * Notifications tab id.
+		 *
+		 * @since 1.1.0
+		 * @var string
+		 */
+		const TAB_NOTIFICATIONS = 'notifications';
+
 
 		/**
 		 * SlackAdmin constructor.
@@ -53,11 +69,11 @@ if ( ! class_exists( 'SlackAdmin' ) ) {
 		 */
 		public function register_plugin_tabs() {
 
-			register_setting( SlackPlugin::get_namespace(), SlackPlugin::get_namespace() . '_options' );
+			register_setting( SlackPlugin::PLUGIN_ID, SlackPlugin::PLUGIN_ID . '_options' );
+			register_setting( SlackPlugin::PLUGIN_ID, SlackPlugin::PLUGIN_ID . '_notifications' );
 
-			self::add_tab( 'integration', __( 'Integration', 'dorzki-notifications-to-slack' ) );
-			self::add_tab( 'notifications', __( 'Notifications', 'dorzki-notifications-to-slack' ) );
-			self::add_tab( 'slack_log', __( 'Slack Log', 'dorzki-notifications-to-slack' ) );
+			self::add_tab( self::TAB_INTEGRATION, __( 'Integration', 'dorzki-notifications-to-slack' ) );
+			self::add_tab( self::TAB_NOTIFICATIONS, __( 'Notifications', 'dorzki-notifications-to-slack' ) );
 
 		}
 
@@ -160,7 +176,7 @@ if ( ! class_exists( 'SlackAdmin' ) ) {
 		 */
 		public function register_admin_page() {
 
-			add_options_page( __( 'Slack Notifications', 'dorzki-notifications-to-slack' ), __( 'Slack Notifications', 'dorzki-notifications-to-slack' ), 'manage_options', SlackPlugin::get_namespace(), [
+			add_options_page( __( 'Slack Notifications', 'dorzki-notifications-to-slack' ), __( 'Slack Notifications', 'dorzki-notifications-to-slack' ), 'manage_options', SlackPlugin::PLUGIN_ID, [
 				$this,
 				'admin_page_template'
 			] );
@@ -180,7 +196,7 @@ if ( ! class_exists( 'SlackAdmin' ) ) {
 				wp_die( esc_html__( 'Oops... It\'s seems like you don\'t meet the required level of permissions', 'dorzki-notifications-to-slack' ) );
 			}
 
-			include_once( DS_PLUGIN_ROOT_DIR . DS_TEMPLATES_DIR . 'admin-settings.php' );
+			include_once( DS_TEMPLATES_DIR . 'admin-settings.php' );
 
 		}
 

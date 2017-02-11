@@ -36,7 +36,7 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 		 * @since 1.1.0
 		 * @var string
 		 */
-		protected static $namespace = 'dorzki_slack';
+		const PLUGIN_ID = 'dorzki_slack';
 
 
 		/**
@@ -77,21 +77,6 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 
 
 		/**
-		 * Returns the plugin namespace.
-		 *
-		 * @since   1.1.0
-		 * @version 1.1.0
-		 *
-		 * @return string
-		 */
-		public static function get_namespace() {
-
-			return self::$namespace;
-
-		}
-
-
-		/**
 		 * Enable plugin i18n & l10n.
 		 *
 		 * @since   1.1.0
@@ -112,21 +97,21 @@ if ( ! class_exists( 'SlackPlugin' ) ) {
 		 */
 		public function register_plugin_assets() {
 
-			wp_register_script( "{$this::$namespace}_scripts", DS_PLUGIN_URL . DS_ASSETS_DIR . 'js/admin-scripts.js' );
-			wp_register_style( "{$this::$namespace}_settings-css", DS_PLUGIN_URL . DS_ASSETS_DIR . 'css/admin-styles.css' );
+			wp_register_script( $this::PLUGIN_ID . '_scripts', DS_ASSETS_URL . 'js/admin-scripts.js' );
+			wp_register_style( $this::PLUGIN_ID . '_settings-css', DS_ASSETS_URL . 'css/admin-styles.css' );
 
-			if ( "settings_page_{$this::$namespace}" === get_current_screen()->id ) {
+			if ( 'settings_page_' . $this::PLUGIN_ID === get_current_screen()->id ) {
 
 				wp_enqueue_script( 'jquery' );
 				wp_enqueue_script( 'thickbox' );
 				wp_enqueue_script( 'media_upload' );
 
 				wp_enqueue_style( 'thickbox' );
-				wp_enqueue_style( "{$this::$namespace}_settings-css" );
+				wp_enqueue_style( $this::PLUGIN_ID . '_settings-css' );
 
 			}
 
-			wp_enqueue_script( "{$this::$namespace}_scripts" );
+			wp_enqueue_script( $this::PLUGIN_ID . '_scripts' );
 
 		}
 

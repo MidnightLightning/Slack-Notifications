@@ -32,24 +32,24 @@ if ( ! defined( 'DS_PLUGIN_DIR' ) ) {
 }
 
 if ( ! defined( 'DS_TEMPLATES_DIR' ) ) {
-	define( 'DS_TEMPLATES_DIR', 'templates/' );
+	define( 'DS_TEMPLATES_DIR', DS_PLUGIN_ROOT_DIR . 'templates/' );
 }
 
 if ( ! defined( 'DS_CLASSES_DIR' ) ) {
-	define( 'DS_CLASSES_DIR', 'classes/' );
+	define( 'DS_CLASSES_DIR', DS_PLUGIN_ROOT_DIR . 'classes/' );
 }
 
-if ( ! defined( 'DS_ASSETS_DIR' ) ) {
-	define( 'DS_ASSETS_DIR', 'assets/' );
+if ( ! defined( 'DS_ASSETS_URL' ) ) {
+	define( 'DS_ASSETS_URL', DS_PLUGIN_URL . 'assets/' );
 }
 
 
 /**
  * Plugin Classes
  */
-include_once( DS_PLUGIN_ROOT_DIR . DS_CLASSES_DIR . 'slack-settings.php' );
-include_once( DS_PLUGIN_ROOT_DIR . DS_CLASSES_DIR . 'slack-admin.php' );
-include_once( DS_PLUGIN_ROOT_DIR . DS_CLASSES_DIR . 'slack-plugin.php' );
+include_once( DS_CLASSES_DIR . 'slack-settings.php' );
+include_once( DS_CLASSES_DIR . 'slack-admin.php' );
+include_once( DS_CLASSES_DIR . 'slack-plugin.php' );
 
 
 /**

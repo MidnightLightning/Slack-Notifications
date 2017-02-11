@@ -23,6 +23,14 @@ if ( ! class_exists( 'SlackSettings' ) ) {
 	class SlackSettings {
 
 		/**
+		 * Holds the settings data from the database.
+		 *
+		 * @since 1.1.0
+		 * @var array
+		 */
+		protected $settings_data = [];
+
+		/**
 		 * Text input field type.
 		 *
 		 * @since 1.1.0
@@ -60,6 +68,8 @@ if ( ! class_exists( 'SlackSettings' ) ) {
 		 */
 		function __construct() {
 
+			$this->settings_data = get_option( SlackPlugin::PLUGIN_ID . '_options' );
+
 			add_action( 'admin_init', [ $this, 'register_plugin_fields' ] );
 
 		}
@@ -69,28 +79,28 @@ if ( ! class_exists( 'SlackSettings' ) ) {
 
 			$default_fields = [
 				[
-					'tab_id'            => 'integration',
+					'tab_id'            => SlackAdmin::TAB_INTEGRATION,
 					'field_id'          => 'webhook_url',
 					'field_name'        => __( 'Webhook URL', 'dorzki-notifications-to-slack' ),
 					'field_type'        => self::FIELD_TYPE_TEXT,
 					'field_description' => sprintf( __( 'Add %sSlack Incoming Webhooks%s to your Slack Account and paste the Webhook URL here.', 'dorzki-notifications-to-slack' ), '<a href="https://my.slack.com/services/new/incoming-webhook/" target="_blank">', '</a>' )
 				],
 				[
-					'tab_id'            => 'integration',
+					'tab_id'            => SlackAdmin::TAB_INTEGRATION,
 					'field_id'          => 'channel_name',
 					'field_name'        => __( 'Webhook Name', 'dorzki-notifications-to-slack' ),
 					'field_type'        => self::FIELD_TYPE_TEXT,
 					'field_description' => __( 'Write here the desired channel name to receive notifications, you may write more than one by separating with a comma.', 'dorzki-notifications-to-slack' )
 				],
 				[
-					'tab_id'            => 'integration',
+					'tab_id'            => SlackAdmin::TAB_INTEGRATION,
 					'field_id'          => 'bot_name',
 					'field_name'        => __( 'Bot Name', 'dorzki-notifications-to-slack' ),
 					'field_type'        => self::FIELD_TYPE_TEXT,
 					'field_description' => __( 'The Slack Bot name to be displayed in notifications.', 'dorzki-notifications-to-slack' )
 				],
 				[
-					'tab_id'            => 'integration',
+					'tab_id'            => SlackAdmin::TAB_INTEGRATION,
 					'field_id'          => 'bot_icon',
 					'field_name'        => __( 'Bot Icon', 'dorzki-notifications-to-slack' ),
 					'field_type'        => self::FIELD_TYPE_IMAGE,
@@ -100,7 +110,7 @@ if ( ! class_exists( 'SlackSettings' ) ) {
 
 			foreach ( $default_fields as $field ) {
 
-				self::create_setting_field( $field[ 'tab_id' ], $field[ 'field_id' ], $field[ 'field_name' ], $field[ 'field_type' ], $field[ 'field_description' ] );
+				$this->create_setting_field( $field[ 'tab_id' ], $field[ 'field_id' ], $field[ 'field_name' ], $field[ 'field_type' ], $field[ 'field_description' ] );
 
 			}
 
@@ -121,7 +131,7 @@ if ( ! class_exists( 'SlackSettings' ) ) {
 		 *
 		 * @return bool
 		 */
-		public static function create_setting_field( $tab_id, $field_id, $field_name, $field_type = '', $field_description = '' ) {
+		public function create_setting_field( $tab_id, $field_id, $field_name, $field_type = '', $field_description = '' ) {
 
 			if ( empty( $tab_id ) || empty( $field_id ) || empty( $field_name ) ) {
 				return false;
@@ -140,7 +150,8 @@ if ( ! class_exists( 'SlackSettings' ) ) {
 				'name'        => $field_name,
 				'type'        => $field_type,
 				'description' => $field_description,
-				'value'       => ''
+				'option_id'   => sprintf( '%s_options[%s]', SlackPlugin::PLUGIN_ID, $field_id ),
+				'value'       => isset( $this->settings_data[ $field_id ] ) ? $this->settings_data[ $field_id ] : ''
 			] );
 
 		}

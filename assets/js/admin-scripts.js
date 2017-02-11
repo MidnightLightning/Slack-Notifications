@@ -1,7 +1,7 @@
 jQuery( document ).ready( function( $ ) {
 
 	// Display the media upload screen on click.
-	$( '#slack_bot_image_button' ).on( 'click', function() {
+	$( '.dorzki_image_upload' ).on( 'click', function() {
 
 		tb_show( 'Upload a logo', 'media-upload.php?referer=custom_branding&type=image&TB_iframe=true&post_id=0', false );
 
@@ -9,22 +9,17 @@ jQuery( document ).ready( function( $ ) {
 
 	} );
 
-	// Capture image url from the upload modal.
-	if( location.search.indexOf( 'slack_notifications' ) !== -1 ) {
+	// Assign the uploaded file url to the input.
+	window.send_to_editor = function( html ) {
 
-		// Assign the uploaded file url to the input.
-		window.send_to_editor = function( html ) {
+		var botImage = $( 'img', html );
 
-			var botImage = $( 'img', html );
+		$( '.dorzki_image_src' ).val( botImage.attr( 'src' ) );
+		$( '.dorzki_image_preview' ).html( botImage );
 
-			$( '#slack_bot_image' ).val( botImage.attr( 'src' ) );
-			$( '#slack_bot_image_preview' ).html( botImage );
+		tb_remove();
 
-			tb_remove();
-
-		};
-
-	}
+	};
 
 	// Dismiss the admin notices.
 	$( document ).on( 'click', '.dorzki-slack-notice .notice-dismiss', function() {

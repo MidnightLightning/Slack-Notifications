@@ -22,7 +22,7 @@ $i = 0;
 		<div id="<?php echo esc_attr( $id ); ?>" class="dorzki-tab <?php echo ( $i === 1 ) ? 'active' : ''; ?>">
 			<h3><?php echo esc_html( $tab[ 'name' ] ); ?></h3>
 
-			<?php include( DS_PLUGIN_ROOT_DIR . DS_TEMPLATES_DIR . 'tab-body.php' ); ?>
+			<?php include( DS_TEMPLATES_DIR . 'tabs/tab-body.php' ); ?>
 
 		</div>
 		<!-- /<?php echo ucfirst( $tab[ 'name' ] ); ?> Tab -->
