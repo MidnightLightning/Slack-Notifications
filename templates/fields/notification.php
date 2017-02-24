@@ -10,7 +10,7 @@
 			</div>
 			<div class="dorzki-collapse-body">
 				<p>
-					<input class="regular-text" id="<?php printf( '%s_notifications[%d][name]', SlackPlugin::PLUGIN_ID, $j ); ?>" name="<?php printf( '%s_notifications[%d][name]', SlackPlugin::PLUGIN_ID, $j ); ?>" type="hidden" value="<?php echo esc_attr( ( isset( $field[ 'name' ] ) ) ? $field[ 'name' ] : sprintf( __( 'Notification #%d', 'dorzki-notifications-to-slack' ), $j ) ); ?>">
+					<input class="regular-text" id="<?php printf( '%s_notifications[%d][name]', SlackPlugin::PLUGIN_ID, $j ); ?>" name="<?php printf( '%s_notifications[%d][name]', SlackPlugin::PLUGIN_ID, $j ); ?>" type="hidden" class="notification-name" value="<?php echo esc_attr( ( isset( $field[ 'name' ] ) ) ? $field[ 'name' ] : sprintf( __( 'Notification #%d', 'dorzki-notifications-to-slack' ), $j ) ); ?>">
 				</p>
 				<p>
 					<label for="<?php printf( '%s_notifications[%d][notif_category]', SlackPlugin::PLUGIN_ID, $j ); ?>"><?php esc_html_e( 'Notification Type:', 'dorzki-notifications-to-slack' ); ?></label>
@@ -45,7 +45,7 @@
 				</p>
 				<p>
 					<label for="<?php printf( '%s_notifications[%d][notif_channel]', SlackPlugin::PLUGIN_ID, $j ); ?>"><?php esc_html_e( 'Channel:', 'dorzki-notifications-to-slack' ); ?></label>
-					<input class="regular-text" id="<?php printf( '%s_notifications[%d][notif_channel]', SlackPlugin::PLUGIN_ID, $j ); ?>" name="<?php printf( '%s_notifications[%d][notif_channel]', SlackPlugin::PLUGIN_ID, $j ); ?>" type="text" value="<?php echo esc_attr( ( isset( $field[ 'notif_channel' ] ) ) ? $field[ 'notif_channel' ] : '' ); ?>">
+					<input class="regular-text notification-channel" id="<?php printf( '%s_notifications[%d][notif_channel]', SlackPlugin::PLUGIN_ID, $j ); ?>" name="<?php printf( '%s_notifications[%d][notif_channel]', SlackPlugin::PLUGIN_ID, $j ); ?>" type="text" value="<?php echo esc_attr( ( isset( $field[ 'notif_channel' ] ) ) ? $field[ 'notif_channel' ] : '' ); ?>">
 				</p>
 				<p>
 					<label for="<?php printf( '%s_notifications[%d][notif_bot_name]', SlackPlugin::PLUGIN_ID, $j ); ?>"><?php esc_html_e( 'Bot Name:', 'dorzki-notifications-to-slack' ); ?></label>

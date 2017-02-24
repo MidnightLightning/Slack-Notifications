@@ -91,6 +91,16 @@ jQuery( document ).ready( function( $ ) {
 
 		_select.trigger( 'change' );
 
+		var _select1 = _select.parents( '.dorzki-collapse' ).find( '.notification-type' ).find( ':selected' ).text();
+		var _select2 = _select.parents( '.dorzki-collapse' ).find( '.notification-status' ).find( ':selected' ).text();
+		var _channel = _select.parents( '.dorzki-collapse' ).find( '.notification-channel' ).val().trim();
+
+		if( _select2.length === 0 ) {
+			_select.parents( '.dorzki-collapse' ).find( 'h3' ).html( 'Notify when a <strong>' + _select1 + '</strong> to <strong>' + _channel + '</strong>' );
+		} else {
+			_select.parents( '.dorzki-collapse' ).find( 'h3' ).html( 'Notify when a <strong>' + _select1 + '</strong> is <strong>' + _select2 + '</strong> to <strong>' + _channel + '</strong>' );
+		}
+
 	}
 
 	// Notification category change
